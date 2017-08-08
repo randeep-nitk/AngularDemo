@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+    <meta charset="utf-8" />
+    <!--<script src="Scripts/angular.js"></script>-->
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/Script.js"></script>
+    <link href="CSS/Style.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body ng-controller="myController">
+    Sorting order:  <select ng-model="sortOrder">
+                        <option value="name">Name ASC</option>
+                        <option value="dateOfBirth">Date of birth ASC</option>
+                        <option value="gender">Gender ASC</option>
+                        <option value="-salary">Salary DESC</option>
+                    </select>
+    <br />
+    <br />
+    Rows to display: <input type="number" min="0" max="6" step="1" ng-model="rowLimit" />
+    <br />
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Salary (number filter)</th>
+                <th>Salary (currency filter)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="employee in employees | limitTo:rowLimit | orderBy:sortOrder" >
+                <td>{{employee.name | uppercase}}</td>
+                <td>{{employee.dateOfBirth | date: "dd/MM/yyyy"}}</td>
+                <td>{{employee.gender | lowercase}}</td>
+                <td>{{employee.salary | number:2}}</td>
+                <td>{{employee.salary | currency:"INR":1}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
