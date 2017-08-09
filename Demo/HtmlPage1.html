@@ -9,6 +9,9 @@
     <title></title>
 </head>
 <body ng-controller="myController">
+    Search : <input type="text" placeholder="Search employees" ng-model="searchText.gender" />
+    <br />
+    <br />
     Sorting order:  <select ng-model="sortColumn">
                         <option value="name">Name ASC</option>
                         <option value="dateOfBirth">Date of birth ASC</option>
@@ -41,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="employee in employees | limitTo:rowLimit | orderBy:sortColumn:reverseSort" >
+            <tr ng-repeat="employee in employees | limitTo:rowLimit | orderBy:sortColumn:reverseSort | filter:searchText" >
                 <td>{{employee.name | uppercase}}</td>
                 <td>{{employee.dateOfBirth | date: "dd/MM/yyyy"}}</td>
                 <td>{{employee.gender | lowercase}}</td>
